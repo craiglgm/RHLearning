@@ -1,0 +1,4 @@
+# Author: Craig Glick Miller
+
+print('Hello, World')
+print('3 + 9 =', 3+9)
