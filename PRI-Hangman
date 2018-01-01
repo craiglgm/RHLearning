@@ -1,0 +1,5 @@
+## Author: Craig Glick Miller
+## Practice code from Programming the Raspberry Pi, 2nd Ed. by Simon Monk
+
+# List of words to choose from
+words = ['dog','cat','horse','pig','rooster']
