@@ -4,43 +4,27 @@
 
 import random
 
-words = ['dog','cat','horse','pig','rooster'] # List of words to choose from
+words = ['chicken', 'dog', 'cat', 'mouse', 'frog'] # List of words to choose from
 lives_remaining = 10 #number of misses before you are hung
-game_letters = [] # list of letters chosen this game
 
 def pick_a_word():
-	# pick the word for this game
+	# pick the word for this round
 	return random.choice(words)
-def unique_letter():
-	# compare the guessed letter to the letters already guessed this game. 
-	# return true if it is unique and false if it is already guessed.
-	for item in game_letters:
-		if letter == game_letters(item):
-			return False
-			break
-		else:
-			return True
-			break
-def get_guess:
-	# player input for the turn
-	while True
-		letter = input('Pick a letter:')
-		if unique_letter(letter):
-			game_letters.insert(letter)
-			return letter
-			break
-		print('Not ' + game_letters)
-def process_guess():
-	# compare the guess to the word
+def word_with_blanks(word):
+	print('word_with_blanks') 
+def get_guess(word):
+	# prompt player for their guess
+	print('Lives remaining: ' + str(lives_remaining))
+	word_with_blanks(word)
+	guess = input('Guess a letter or the whole word:')
+	return guess
+def process_guess(guess, word):
+	# determine if guess is correct
+	global lives_remaining
 	lives_remaining -= 1
-	for item in word:
-		if guess == word(item):
-			print('Right!')
-			break
-			
-			# Show the word with current letters in it.
-			
+	return False
 def play():
+	# the base logic of the game.
 	word = pick_a_word()
 	while True:
 		guess = get_guess(word)
@@ -51,4 +35,5 @@ def play():
 			print('Sorry, you lose. Please play again!')
 			print('The word was ' + word)
 			break
-		
+print("Let's play Hangman!")
+play()
