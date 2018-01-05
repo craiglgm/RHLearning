@@ -4,8 +4,11 @@
 
 import random
 
-words = ['chicken', 'dog', 'cat', 'mouse', 'frog'] # List of words to choose from
+# List of words to choose from
+words = ['chicken', 'dog', 'cat', 'mouse', 'frog'] 
 lives_remaining = 10 #number of misses before you are hung
+display_word = '' # string to show while guessing
+guesses = '' # list of guessed letters
 
 def pick_a_word():
 	# pick the word for this round
@@ -13,8 +16,8 @@ def pick_a_word():
 def word_with_blanks(word):
 	# substitute blanks for letters and fill in the correct letters.
 	for idx in word:
-		word = word.replace(idx,'-')
-	print('word_with_blanks') 
+		display_word = word.replace(idx,'-')
+	print(word) 
 def get_guess(word):
 	# prompt player for their guess
 	print('Lives remaining: ' + str(lives_remaining))
