@@ -11,6 +11,9 @@ def pick_a_word():
 	# pick the word for this round
 	return random.choice(words)
 def word_with_blanks(word):
+	# substitute blanks for letters and fill in the correct letters.
+	for idx in word:
+		word = word.replace(idx,'-')
 	print('word_with_blanks') 
 def get_guess(word):
 	# prompt player for their guess
