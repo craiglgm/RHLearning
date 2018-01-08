@@ -7,39 +7,78 @@ import random
 # List of words to choose from
 words = ['chicken', 'dog', 'cat', 'mouse', 'frog'] 
 lives_remaining = 10 #number of misses before you are hung
-display_word = '' # string to show while guessing
 guesses = '' # list of guessed letters
 
-def pick_a_word():
-	# pick the word for this round
-	return random.choice(words)
-def word_with_blanks(word):
-	# substitute blanks for letters and fill in the correct letters.
-	for idx in word:
-		display_word = word.replace(idx,'-')
-	print(word) 
-def get_guess(word):
-	# prompt player for their guess
-	print('Lives remaining: ' + str(lives_remaining))
-	word_with_blanks(word)
-	guess = input('Guess a letter or the whole word:')
-	return guess
-def process_guess(guess, word):
-	# determine if guess is correct
-	global lives_remaining
-	lives_remaining -= 1
-	return False
 def play():
 	# the base logic of the game.
 	word = pick_a_word()
 	while True:
 		guess = get_guess(word)
 		if process_guess(guess, word):
-			print('Congrats! You win!')
+			print('Congrats! The word was', word)
 			break
 		if lives_remaining == 0:
-			print('Sorry, you lose. Please play again!')
+			print('Sorry, you lose. It was', word)
 			print('The word was ' + word)
 			break
+
+def pick_a_word():
+	# pick the word for this round
+	return random.choice(words)
+	
+def get_guess(word):
+	# prompt player for their guess
+	print('Lives remaining: ' + str(lives_remaining))
+	print_word_with_blanks(word)
+	print('Guessed letters: ' + guesses)
+	guess = input('Guess a letter or the whole word:')
+	return guess
+	
+def print_word_with_blanks(word):
+	# substitute blanks for letters and fill in the correct letters.
+	display_word = ''
+	for letter in word:
+		if guesses.find(letter) > -1:
+			#letter found
+			display_word += letter
+		else:
+			#not found
+			display_word += '-'
+	print(display_word) 
+		
+def process_guess(guess, word):
+	# determine if guess is correct
+	global lives_remaining
+	global guesses
+	if len(guess) > 1:
+		return whole_word_guess(guess, word)
+	else:
+		return single_letter_guess(guess, word)
+
+def whole_word_guess(guess, word):
+	global lives_remaining
+	if guess == word:
+		return True
+	else:
+		lives_remaining -= 1
+		return False
+
+def single_letter_guess(guess, word):
+	global lives_remaining
+	global guesses
+	if word.find(guess) == -1:
+		#not a correct guess
+		lives_remaining -= 1
+	guesses += guess
+	if all_letters_guessed(word):
+		return True
+	return False
+
+def all_letters_guessed(word):
+	for letter in word:
+		if guesses.find(letter) == -1:
+			return False
+	return True
+	
 print("Let's play Hangman!")
 play()
